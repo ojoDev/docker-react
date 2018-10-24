@@ -1,0 +1,10 @@
+sudo:required #Indica que tendremos permisos de superusuario
+services:
+  - docker # Indica a travis que necesita una copia de Docker
+
+before_install: #Comandos que se ejecutan antes de los test
+  - docker build -t ojodev/docker-react -f Dockerfile.dev . # Construye imagen docker poniendole alias y con el archivo .dev
+
+script:
+  - docker run ojodev/docker-react npm run test -- --coverage 
+  # Esta anotacion (coverage) final evita que npm se quede esperando a que le digamos que hacer tras los test (si no, no acabarían)
