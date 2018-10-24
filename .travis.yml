@@ -1,5 +1,4 @@
-language: node_js
-sudo: enabled #Indica que tendremos permisos de superusuario
+sudo: required #Indica que tendremos permisos de superusuario
 services:
   - docker # Indica a travis que necesita una copia de Docker
 
