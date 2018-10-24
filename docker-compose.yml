@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev 
+    ports:
+      - "3000:3000"
+    volumes:
+      - /usr/app/node_modules  #Indica que no hay que versionar esto del contenedor pues no lo tenemos en local
+      - .:/usr/app  #Mapea el directoro actual a /app del contenedor
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev 
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+    command: ["npm", "run", "test"] #Será la app que ejecuta como inicio los test
