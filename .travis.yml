@@ -8,3 +8,17 @@ before_install: #Comandos que se ejecutan antes de los test
 script:
   - docker run ojodev/docker-react npm run test -- --coverage 
   # Esta anotacion (coverage) final evita que npm se quede esperando a que le digamos que hacer tras los test (si no, no acabarían)
+
+deploy: #Utilizado para desplegar en AWS
+  provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "docker-react" # Nombre de la app en AWS
+  env: "DockerReact-env" # Environment ID en AWS
+  bucker_name: "elasticbeanstalk-eu-west-2-582715938046"
+  bucket_path: "docker-react"  # En principio igual a "app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_ACCESS_SECRET"
+  
